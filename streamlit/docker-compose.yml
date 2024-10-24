@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  streamlit:
+    image: python:3.9-slim
+    ports:
+      - "8501:8501"
+    volumes:
+      - /home/ec2-user/streamlit/app:/app
+    working_dir: /app
+    command: >
+      /bin/sh -c "
+      apt-get update && 
+      apt-get install -y build-essential curl software-properties-common git && 
+      rm -rf /var/lib/apt/lists/* &&
+      if [ -z \"$(ls -A /app)\" ]; then git clone https://github.com/streamlit/streamlit-example.git .; fi &&
+      pip3 install -r requirements.txt &&
+      streamlit run streamlit_app.py --server.port=8501 --server.address=0.0.0.0"
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://localhost:8501/_stcore/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3

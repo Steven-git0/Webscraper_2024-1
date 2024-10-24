@@ -1,0 +1,1 @@
+[2024-07-17T21:12:50.712+0000] {scheduler_job_runner.py:781} ERROR - Executor reports task instance <TaskInstance: Webscraping.Pre-Scrape_script manual__2024-07-17T08:25:37.156618+00:00 [queued]> finished (failed) although the task says it's queued. (Info: None) Was the task killed externally?

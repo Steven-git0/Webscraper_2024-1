@@ -1,0 +1,27 @@
+[2024-07-31T04:11:12.624+0000] {taskinstance.py:1979} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: Webscraping.add_known_host manual__2024-07-18T01:40:54.041901+00:00 [queued]>
+[2024-07-31T04:11:12.633+0000] {taskinstance.py:1979} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: Webscraping.add_known_host manual__2024-07-18T01:40:54.041901+00:00 [queued]>
+[2024-07-31T04:11:12.633+0000] {taskinstance.py:2193} INFO - Starting attempt 4 of 4
+[2024-07-31T04:11:12.648+0000] {taskinstance.py:2217} INFO - Executing <Task(BashOperator): add_known_host> on 2024-07-18 01:40:54.041901+00:00
+[2024-07-31T04:11:12.651+0000] {standard_task_runner.py:60} INFO - Started process 132 to run task
+[2024-07-31T04:11:12.653+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'Webscraping', 'add_known_host', 'manual__2024-07-18T01:40:54.041901+00:00', '--job-id', '197', '--raw', '--subdir', 'DAGS_FOLDER/webscrape_dag.py', '--cfg-path', '/tmp/tmp30eb2y9d']
+[2024-07-31T04:11:12.654+0000] {standard_task_runner.py:88} INFO - Job 197: Subtask add_known_host
+[2024-07-31T04:11:12.702+0000] {task_command.py:423} INFO - Running <TaskInstance: Webscraping.add_known_host manual__2024-07-18T01:40:54.041901+00:00 [running]> on host 8227a508e5ed
+[2024-07-31T04:11:12.778+0000] {taskinstance.py:2513} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='Webscraping' AIRFLOW_CTX_TASK_ID='add_known_host' AIRFLOW_CTX_EXECUTION_DATE='2024-07-18T01:40:54.041901+00:00' AIRFLOW_CTX_TRY_NUMBER='4' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-07-18T01:40:54.041901+00:00'
+[2024-07-31T04:11:12.779+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2024-07-31T04:11:12.779+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', 'ssh-keyscan -H 3.22.55.181 >> /home/ec2-user/***/dags/id_rsa_***']
+[2024-07-31T04:11:12.786+0000] {subprocess.py:86} INFO - Output:
+[2024-07-31T04:11:12.790+0000] {subprocess.py:93} INFO - /usr/bin/bash: line 1: /home/ec2-user/***/dags/id_rsa_***: No such file or directory
+[2024-07-31T04:11:12.790+0000] {subprocess.py:97} INFO - Command exited with return code 1
+[2024-07-31T04:11:12.800+0000] {taskinstance.py:2731} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 444, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 414, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/bash.py", line 212, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 1.
+[2024-07-31T04:11:12.802+0000] {taskinstance.py:1149} INFO - Marking task as FAILED. dag_id=Webscraping, task_id=add_known_host, execution_date=20240718T014054, start_date=20240731T041112, end_date=20240731T041112
+[2024-07-31T04:11:12.815+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 197 for task add_known_host (Bash command failed. The command returned a non-zero exit code 1.; 132)
+[2024-07-31T04:11:12.827+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2024-07-31T04:11:12.848+0000] {taskinstance.py:3312} INFO - 0 downstream tasks scheduled from follow-on schedule check

@@ -1,0 +1,91 @@
+IN TERMINAL
+    echo 1048576 | sudo tee /proc/sys/fs/aio-max-nr
+    sudo nano /etc/sysctl.conf
+        fs.aio-max-nr = 1048576
+    sudo sysctl -p
+
+
+When installing Janusgraph use the mms/janusgraph yaml file as per:
+https://university.scylladb.com/courses/the-mutant-monitoring-system-training-course/lessons/a-graph-data-system-powered-by-scylladb-and-janusgraph/
+docker-compose  -f ./docker-compose-cql.yml up (DO NOT RUN IN DETACHED MODE)
+Afterwards go into the container and run the following (docker exec -it --user root janusgraph-server /bin/bash): 
+run apt-get update && apt-get install nano
+then go into conf/remote.yaml and change the serializer to:
+serializer: { className: org.apache.tinkerpop.gremlin.driver.ser.GraphSONMessageSerializerV3d0, config: { serializeResultToString: true }}
+This step is needed to match the serializer between the python script and the gremlin server.
+
+- /var/run/docker.sock:/var/run/docker.sock
+must be placed in airflow volumes (can be placed in x-airflow-common)
+
+
+-sudo chmod 666 /var/run/docker.sock
+had to be used in the ec2 instance to give access to docker containers in airflow
+
+
+Personal Mistakes:
+
+When running airflow I copied and pasted the docker build image 
+
+Future Improvements:
+
+The SQL tables and janusgraph are needlessly integrated, they can be seperated into their own seperate process.
+The janusgraph itself can also be made after sql has finished cleaning everything up.
+
+
+
+ERROR: Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock
+
+Step 1:
+Create docker group if not exist : sudo groupadd docker
+
+Step 2:
+Add user to docker group : sudo usermod -aG docker ${USER}
+
+Step 3:
+Change docker.sock to new permission : sudo chmod 666 /var/run/docker.sock
+
+Step 4:
+Finally restart docker daemon service : sudo systemctl restart docker
+
+Make persistent
+sudo mkdir -p /etc/systemd/system/docker.service.d
+sudo nano /etc/systemd/system/docker.service.d/override.conf
+Into file:
+[Service]
+ExecStartPost=/bin/sh -c 'chmod 666 /var/run/docker.sock'
+
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+
+
+FOR AIRFLOW CONTAINER RUN IN WEBSERVER:
+cat <<EOF > ~/.ssh/id_rsa
+-----BEGIN RSA PRIVATE KEY-----
+MIIEpAIBAAKCAQEA05QJEf9xCBrbBDo6jO+/OW4ihmG5xnpz2rAhWfP/EfxClnKk
+cu0Ij7NDaGQgaoEF0HEQVipEXTQxzaauNhvgGH0YR5DIRu2KiJZJZ/AuQvM+yMxq
+Li3+BwsvnmRds8Gh0pSzVGhiknsrelEVE1nsAn8tQvD7zCz6mSUfQTKwasob9o76
+/Z7DXK9uqKHOIkvWOFkoIZzhihhC0/+xE/RMH84C7uEelVvqyNn+0hEEHV5BTxU6
+cJuOuWlfjJrKbtZhc4YCwdjhC+lqaTv9ziIQcJo7AeqmjPntnbzwuVr2xArfRi+s
+y5Vog34+bCLs0gNSZc+Axocwm5GCrNv3MpIGzQIDAQABAoIBAQDPfo6mp+0iFbRV
+IQXq0fSnTett/slCbTTRc4pBvZiY+twSz7uXOf77bsLczdU8newlz7xFxI3nGhj9
+pkmTpyLO4V++T68aYDtMWJcE5/d2kTcxlcdMIq7OGZpJrAR5FZyt+EcmsHh7T3AE
+NSCGKdnbWP36eHt4cWQSbOWJ+zwofOPyceXSMw2xdjfFRz4H8TvZPioAX/v3iHBn
+MWeJL3xpwJ2EdwcsmQnVfihwKEnnGOkE47E0DO+x0+9JI9JUWZhoPV5AZ+7+IjVf
+tptuQQmJ6y0awWlGSVSnncLZPqaNloNRyx+GVduM542G8HuYcQsp+lcLjj1IGXkz
+wpdt/aPBAoGBAPmtfOmlCncw0WbRHiP0/2QCsrlgzy0O6nFXN19HZBX+g1Q8f41G
+wH3ffwkguYtWAoC8/3ajWu0sx4pP6yVkNT1FIoR7hgCcSd1LqCRVWwWeWTHn/0PU
+4L5anRWpxPgl09K+g+zzpG6U2WjdMGLrKWQsCsREzZnOuy3Biayk54jXAoGBANjv
+klJVW4Pql9P7+KiF8uQ+NrPXYzpo71UGnxeCKdcStaeaRf2BNQ0BSR+ybBR4tJcX
+e7UMq54MlfmTBtgeqBnJOjwRqKiVys8x7FMs05DdIgkDjnPU5MFz/r0UjQJ07iOh
+bHYKEyCrJHEw5CA0CmoB63rHS8/woEjCCq3HAIT7AoGAZfOyoxFygZMcnrhbb2FW
+e/ciFdJzJroFf3yWrsBPHTANXnNJvl2asot1qzuCqGPZp8oFIuO3eEulu1PA+Ea/
++qHlY2WxJUSsYMHJCfUUsumjEF7kfEVL9E66ACOPu6huo4qKAlLG3STI1ioj3PCb
+uTzGtLhHoDurcRaraiT4KocCgYEApMFGImubRlOrnZ6XGf4pGzk4uFsTjG/XnH6b
+4vHDLwmRlsmu8Dnp/YeFbqJGPUHy/XEjTbxitnUejd4g65BU4MiYBrjum6Kv1a43
+qm+3+iRHzgq6bLQ6S8X5qMZr1XrSxZK6WeeK4Vu5IJIeH2sGob31hljH9hPs13Uv
+QQ2LEnMCgYBSpabXJKi5lR+CaHXf/ML3vqncinR9Crq+ZK91JU6/5TPTG+jbYnCl
+PHxmxeOW5Vyz8Bu7n9RwoePOEQL8jgbN4FbbZ9hVgssRfE57QhDwtJKSC5KcJmyl
+hKP+/lHJJtu4bipWyHon0F4UVeo1HJjdwRxs5BuykciBo6w8DRt1SA==
+-----END RSA PRIVATE KEY-----
+EOF
+chmod 600 ~/.ssh/id_rsa

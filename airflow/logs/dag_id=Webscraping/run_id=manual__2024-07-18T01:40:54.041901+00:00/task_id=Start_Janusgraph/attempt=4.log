@@ -1,0 +1,18 @@
+[2024-07-31T06:49:07.434+0000] {taskinstance.py:1979} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: Webscraping.Start_Janusgraph manual__2024-07-18T01:40:54.041901+00:00 [queued]>
+[2024-07-31T06:49:07.446+0000] {taskinstance.py:1979} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: Webscraping.Start_Janusgraph manual__2024-07-18T01:40:54.041901+00:00 [queued]>
+[2024-07-31T06:49:07.446+0000] {taskinstance.py:2193} INFO - Starting attempt 4 of 5
+[2024-07-31T06:49:07.461+0000] {taskinstance.py:2217} INFO - Executing <Task(BashOperator): Start_Janusgraph> on 2024-07-18 01:40:54.041901+00:00
+[2024-07-31T06:49:07.464+0000] {standard_task_runner.py:60} INFO - Started process 2457 to run task
+[2024-07-31T06:49:07.467+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'Webscraping', 'Start_Janusgraph', 'manual__2024-07-18T01:40:54.041901+00:00', '--job-id', '205', '--raw', '--subdir', 'DAGS_FOLDER/webscrape_dag.py', '--cfg-path', '/tmp/tmp_eqbpr55']
+[2024-07-31T06:49:07.467+0000] {standard_task_runner.py:88} INFO - Job 205: Subtask Start_Janusgraph
+[2024-07-31T06:49:07.515+0000] {task_command.py:423} INFO - Running <TaskInstance: Webscraping.Start_Janusgraph manual__2024-07-18T01:40:54.041901+00:00 [running]> on host 8227a508e5ed
+[2024-07-31T06:49:07.605+0000] {taskinstance.py:2513} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='Webscraping' AIRFLOW_CTX_TASK_ID='Start_Janusgraph' AIRFLOW_CTX_EXECUTION_DATE='2024-07-18T01:40:54.041901+00:00' AIRFLOW_CTX_TRY_NUMBER='4' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-07-18T01:40:54.041901+00:00'
+[2024-07-31T06:49:07.607+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2024-07-31T06:49:07.607+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', 'echo "Starting Janusgraph container" && docker start janusgraph-server']
+[2024-07-31T06:49:07.620+0000] {subprocess.py:86} INFO - Output:
+[2024-07-31T06:49:07.621+0000] {subprocess.py:93} INFO - Starting Janusgraph container
+[2024-07-31T06:49:07.641+0000] {subprocess.py:93} INFO - janusgraph-server
+[2024-07-31T06:49:07.641+0000] {subprocess.py:97} INFO - Command exited with return code 0
+[2024-07-31T06:49:07.675+0000] {taskinstance.py:1149} INFO - Marking task as SUCCESS. dag_id=Webscraping, task_id=Start_Janusgraph, execution_date=20240718T014054, start_date=20240731T064907, end_date=20240731T064907
+[2024-07-31T06:49:07.720+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2024-07-31T06:49:07.751+0000] {taskinstance.py:3312} INFO - 1 downstream tasks scheduled from follow-on schedule check

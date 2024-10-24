@@ -1,0 +1,9 @@
+*.cache
+*.local
+*.ssh
+*.vscode-remote-containers
+*.vscode-server
+*.bash_history
+*.bash_logout
+*.bash_profile
+*.bashrc

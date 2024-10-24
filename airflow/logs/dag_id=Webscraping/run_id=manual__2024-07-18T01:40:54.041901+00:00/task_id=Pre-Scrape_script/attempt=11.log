@@ -1,0 +1,19 @@
+[2024-08-01T07:55:30.152+0000] {taskinstance.py:1979} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: Webscraping.Pre-Scrape_script manual__2024-07-18T01:40:54.041901+00:00 [queued]>
+[2024-08-01T07:55:30.160+0000] {taskinstance.py:1979} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: Webscraping.Pre-Scrape_script manual__2024-07-18T01:40:54.041901+00:00 [queued]>
+[2024-08-01T07:55:30.160+0000] {taskinstance.py:2193} INFO - Starting attempt 11 of 12
+[2024-08-01T07:55:30.173+0000] {taskinstance.py:2217} INFO - Executing <Task(BashOperator): Pre-Scrape_script> on 2024-07-18 01:40:54.041901+00:00
+[2024-08-01T07:55:30.177+0000] {standard_task_runner.py:60} INFO - Started process 3657 to run task
+[2024-08-01T07:55:30.180+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'Webscraping', 'Pre-Scrape_script', 'manual__2024-07-18T01:40:54.041901+00:00', '--job-id', '227', '--raw', '--subdir', 'DAGS_FOLDER/webscrape_dag.py', '--cfg-path', '/tmp/tmpz7uuoa1z']
+[2024-08-01T07:55:30.180+0000] {standard_task_runner.py:88} INFO - Job 227: Subtask Pre-Scrape_script
+[2024-08-01T07:55:30.228+0000] {task_command.py:423} INFO - Running <TaskInstance: Webscraping.Pre-Scrape_script manual__2024-07-18T01:40:54.041901+00:00 [running]> on host 8227a508e5ed
+[2024-08-01T07:55:30.314+0000] {taskinstance.py:2513} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='Webscraping' AIRFLOW_CTX_TASK_ID='Pre-Scrape_script' AIRFLOW_CTX_EXECUTION_DATE='2024-07-18T01:40:54.041901+00:00' AIRFLOW_CTX_TRY_NUMBER='11' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-07-18T01:40:54.041901+00:00'
+[2024-08-01T07:55:30.315+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2024-08-01T07:55:30.315+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', 'echo "Running pre-scrape script" && ssh -i /opt/***/dags/id_rsa_*** ec2-user@3.22.55.181 "python3 /home/ec2-user/pre_scrape.py"']
+[2024-08-01T07:55:30.323+0000] {subprocess.py:86} INFO - Output:
+[2024-08-01T07:55:30.324+0000] {subprocess.py:93} INFO - Running pre-scrape script
+[2024-08-01T07:55:30.906+0000] {subprocess.py:93} INFO - running
+[2024-08-01T07:55:30.906+0000] {subprocess.py:93} INFO - Staging Database Cleared
+[2024-08-01T07:55:30.955+0000] {subprocess.py:97} INFO - Command exited with return code 0
+[2024-08-01T07:55:30.980+0000] {taskinstance.py:1149} INFO - Marking task as SUCCESS. dag_id=Webscraping, task_id=Pre-Scrape_script, execution_date=20240718T014054, start_date=20240801T075530, end_date=20240801T075530
+[2024-08-01T07:55:30.999+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2024-08-01T07:55:31.024+0000] {taskinstance.py:3312} INFO - 1 downstream tasks scheduled from follow-on schedule check

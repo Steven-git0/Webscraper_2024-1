@@ -1,0 +1,27 @@
+[2024-07-31T06:49:09.785+0000] {taskinstance.py:1979} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: Webscraping.Pre-Scrape_script manual__2024-07-18T01:40:54.041901+00:00 [queued]>
+[2024-07-31T06:49:09.794+0000] {taskinstance.py:1979} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: Webscraping.Pre-Scrape_script manual__2024-07-18T01:40:54.041901+00:00 [queued]>
+[2024-07-31T06:49:09.794+0000] {taskinstance.py:2193} INFO - Starting attempt 4 of 5
+[2024-07-31T06:49:09.808+0000] {taskinstance.py:2217} INFO - Executing <Task(BashOperator): Pre-Scrape_script> on 2024-07-18 01:40:54.041901+00:00
+[2024-07-31T06:49:09.811+0000] {standard_task_runner.py:60} INFO - Started process 2469 to run task
+[2024-07-31T06:49:09.816+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'Webscraping', 'Pre-Scrape_script', 'manual__2024-07-18T01:40:54.041901+00:00', '--job-id', '207', '--raw', '--subdir', 'DAGS_FOLDER/webscrape_dag.py', '--cfg-path', '/tmp/tmp5fw3nb6q']
+[2024-07-31T06:49:09.816+0000] {standard_task_runner.py:88} INFO - Job 207: Subtask Pre-Scrape_script
+[2024-07-31T06:49:09.865+0000] {task_command.py:423} INFO - Running <TaskInstance: Webscraping.Pre-Scrape_script manual__2024-07-18T01:40:54.041901+00:00 [running]> on host 8227a508e5ed
+[2024-07-31T06:49:09.945+0000] {taskinstance.py:2513} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='Webscraping' AIRFLOW_CTX_TASK_ID='Pre-Scrape_script' AIRFLOW_CTX_EXECUTION_DATE='2024-07-18T01:40:54.041901+00:00' AIRFLOW_CTX_TRY_NUMBER='4' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-07-18T01:40:54.041901+00:00'
+[2024-07-31T06:49:09.946+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2024-07-31T06:49:09.946+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', 'ssh -i /opt/***/dags/id_rsa_*** ec2-user@3.22.55.181 "python3 /home/ec2-user/pre_scrape.py"']
+[2024-07-31T06:49:09.955+0000] {subprocess.py:86} INFO - Output:
+[2024-07-31T06:49:09.985+0000] {subprocess.py:93} INFO - Host key verification failed.
+[2024-07-31T06:49:09.986+0000] {subprocess.py:97} INFO - Command exited with return code 255
+[2024-07-31T06:49:09.999+0000] {taskinstance.py:2731} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 444, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 414, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/bash.py", line 212, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 255.
+[2024-07-31T06:49:10.002+0000] {taskinstance.py:1149} INFO - Marking task as UP_FOR_RETRY. dag_id=Webscraping, task_id=Pre-Scrape_script, execution_date=20240718T014054, start_date=20240731T064909, end_date=20240731T064910
+[2024-07-31T06:49:10.016+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 207 for task Pre-Scrape_script (Bash command failed. The command returned a non-zero exit code 255.; 2469)
+[2024-07-31T06:49:10.029+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2024-07-31T06:49:10.054+0000] {taskinstance.py:3312} INFO - 0 downstream tasks scheduled from follow-on schedule check
