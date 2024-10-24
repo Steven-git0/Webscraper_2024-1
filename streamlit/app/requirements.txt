@@ -1,0 +1,5 @@
+altair
+pandas
+streamlit
+psycopg2-binary
+gremlinpython
